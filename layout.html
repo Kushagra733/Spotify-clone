@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+   
+    <title>Spotify</title>
+
+</head>
+
+<body>
+
+    <nav>
+        <ul>
+            <li class="brand"><img src="logo.png" alt="spotify logo" width="40px" height="40px">
+                <div class="ele">Spotify</div>
+            </li>
+            <li>Home</li>
+            <li>About</li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <div class="songlist">
+
+            <div class="songitem">
+
+
+            <img src="https://wallpapercave.com/dwp2x/wp7014074.jpg" alt="1" height="60px" width="60px">
+            <span>Lagan Lagi</span>
+            <span>5:53</span>
+
+            </div>
+            
+        </div>
+        <div class="songbanner">
+
+            <img src="https://wallpapercave.com/dwp2x/wp7014074.jpg"  width="300px" height="450px">
+        </div>
+
+    </div>
+    <div class="bottom">
+
+        <input type="range" name="range" id="myProgressBar"  value ='0' min="0" max="100">
+        <div class="play">
+            <img src="backwards.png" height="40px" width="40px" class="icon" id="prev">
+            <img src="play.png" height="40px" width="40px" class="icon" id="masterPlay">
+            <img src="forward.png" height="40px" width="40px" class="icon" id="next">
+        </div>
+
+
+    </div>
+
+
+
+</body>
+<script>
+console.log('hello');
+let audioElement = new Audio('laganlagi.mp3');
+let masterPlay = document.getElementById('masterPlay');
+let myProgressBar = document.getElementById('myProgressBar');
+masterPlay.addEventListener('click',()=>{
+
+    
+
+    if(masterPlay.src =="http://127.0.0.1:5500/play.png")
+    {
+        console.log("playing");
+        audioElement.play();
+        masterPlay.src = "pause.png";
+    }
+    else 
+    {
+        console.log("stopped");
+        audioElement.pause();
+        masterPlay.src = "play.png";
+    }
+});
+audioElement.addEventListener('timeupdate',()=>{
+
+    progress= parseInt((audioElement.currentTime/audioElement.duration)*100);
+    myProgressBar.value = progress;
+});
+myProgressBar.addEventListener('change',()=>{
+    audioElement.currentTime = (myProgressBar.value*audioElement.duration)/100;
+})
+
+
+</script>
+
+</html>
